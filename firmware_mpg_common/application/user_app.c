@@ -88,7 +88,7 @@ Promises:
 */
 void UserAppInitialize(void)
 {
-  TimerStart();
+   TimerInitialize();
   /* If good initialization, set state to Idle */
   if( 1 )
   {
@@ -137,7 +137,8 @@ State Machine Function Definitions
 /* Wait for a message to be queued */
 static void UserAppSM_Idle(void)
 {
-
+    TimerStart(TIMER_CHANNEL1);
+    TimerAssignCallback(toglight);
 } /* end UserAppSM_Idle() */
      
 
@@ -156,6 +157,11 @@ static void UserAppSM_FailedInit(void)
     
 } /* end UserAppSM_FailedInit() */
 
+//toggle the light
+void toglight(void)
+{
+  LedToggle(RED);
+}
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* End of File                                                                                                        */
