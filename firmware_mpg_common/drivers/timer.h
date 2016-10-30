@@ -25,92 +25,92 @@ PA26 Peripheral B is an open pin avaialble as external clock input TCLK2
 PB5 Peripheral A is an open pin available for TIOA1 I/O function
 PB6 Peripheral A is an open pin available for TIOB1 I/O function
 */
-
+#define TCB_BMR_INIT (u32)0x00100800
 /* Timer 1 interrupt period (1 tick = 2.67us); max 65535 */
-#define TC1_RC_INIT (u32)
+#define TC1_RC_INIT (u32)4
 
-#define TC1_CCR_INIT (u32)
+#define TC1_CCR_INIT (u32)0x00000002
 /*
     31-04 [0] Reserved
 
-    03 [] Reserved
-    02 [] SWTRG 
-    01 [] CLKDIS 
-    00 [] CLKEN 
+    03 [0] Reserved
+    02 [0] SWTRG 
+    01 [1] CLKDIS 
+    00 [0] CLKEN 
 */
 
 
-#define TC1_CMR_INIT (u32)0x
+#define TC1_CMR_INIT (u32)0x000CC403
 /*
-    31 [] BSWTRG 
-    30 [] "
-    29 [] BEEVT 
-    28 [] "
+    31 [0] BSWTRG no software trigger effect on TIOB
+    30 [0] "
+    29 [0] BEEVT no external event effect on TIOB
+    28 [0] "
 
-    27 [] BCPC 
-    26 [] "
-    25 [] BCPB
-    24 [] "
+    27 [0] BCPC no RC compare effect 
+    26 [0] "
+    25 [0] BCPB
+    24 [0] "
 
-    23 [] ASWTRG
-    22 [] "
-    21 [] AEEVT 
-    20 [] "
+    23 [0] ASWTRG
+    22 [0] "
+    21 [0] AEEVT 
+    20 [0] "
 
-    19 [] ACPC 
-    18 [] "
-    17 [] ACPA
-    16 [] "
+    19 [1] ACPC 
+    18 [1] "
+    17 [0] ACPA
+    16 [0] "
 
-    15 [] WAVE 
-    14 [] WAVSEL 
-    13 [] "
-    12 [] ENETRG 
+    15 [1] WAVE 
+    14 [1] WAVSEL 
+    13 [0] "
+    12 [0] ENETRG 
 
-    11 [] EEVT 
-    10 [] "
-    09 [] EEVTEDG 
-    08 [] "
+    11 [0] EEVT 
+    10 [1] "
+    09 [0] EEVTEDG 
+    08 [0] "
 
-    07 [] CPCDIS 
-    06 [] CPCSTOP 
-    05 [] BURST 
-    04 [] "
+    07 [0] CPCDIS 
+    06 [0] CPCSTOP 
+    05 [0] BURST 
+    04 [0] "
 
     03 [] CLKI 
-    02 [] TCCLKS 
-    01 [] "
-    00 [] "
+    02 [0] TCCLKS 
+    01 [1] "
+    00 [1] "
 */
 
-#define TC1_IER_INIT (u32)0x
+#define TC1_IER_INIT (u32)0x00000010
 /*
     31 -08 [0] Reserved 
 
-    07 [] ETRGS RC Load interrupt not enabled
-    06 [] LDRBS RB Load interrupt not enabled
-    05 [] LDRAS RA Load interrupt not enabled
-    04 [] CPCS RC compare interrupt is enabled
+    07 [0] ETRGS RC Load interrupt not enabled
+    06 [0] LDRBS RB Load interrupt not enabled
+    05 [0] LDRAS RA Load interrupt not enabled
+    04 [1] CPCS RC compare interrupt is enabled
 
-    03 [] CPBS RB compare interrupt not enabled
-    02 [] CPAS RA Compare Interrupt enabled
-    01 [] LOVRS Lover's bit? Load Overrun interrupt not enabled 
-    00 [] COVFS Counter Overflow interrupt not enabled
+    03 [0] CPBS RB compare interrupt not enabled
+    02 [0] CPAS RA Compare Interrupt enabled
+    01 [0] LOVRS Lover's bit? Load Overrun interrupt not enabled 
+    00 [0] COVFS Counter Overflow interrupt not enabled
 */
 
-#define TC1_IDR_INIT (u32)0x
+#define TC1_IDR_INIT (u32)0x000000EB
 /*
     31-08 [0] Reserved 
 
-    07 [] ETRGS RC Load interrupt disabled
-    06 [] LDRBS RB Load interrupt disabled
-    05 [] LDRAS RA Load interrupt disabled
-    04 [] CPCS RC compare interrupt not disabled
+    07 [1] ETRGS RC Load interrupt disabled
+    06 [1] LDRBS RB Load interrupt disabled
+    05 [1] LDRAS RA Load interrupt disabled
+    04 [0] CPCS RC compare interrupt not disabled
 
-    03 [] CPBS RB compare interrupt disabled
-    02 [] CPAS RA Compare Interrupt not disabled
-    01 [] LOVRS Lover's bit?!? Load Overrun interrupt disabled 
-    00 [] COVFS Counter Overflow interrupt disabled
+    03 [1] CPBS RB compare interrupt disabled
+    02 [0] CPAS RA Compare Interrupt not disabled
+    01 [1] LOVRS Lover's bit?!? Load Overrun interrupt disabled 
+    00 [1] COVFS Counter Overflow interrupt disabled
 */
 
 

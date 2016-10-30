@@ -66,7 +66,11 @@ Requires:
 Promises:
   - Update config (running or stopped?)
 */
-
+void TimerSetTime(void)
+{
+  AT91C_BASE_TC1->TC_RC = u32TimerCountx;
+}
+  
 /*----------------------------------------------------------------------------------------------------------------------
 Function: TimerStart
 
@@ -108,6 +112,11 @@ Requires:
 Promises:
   - 
 */
+void TimerAssignCallback(fnCode_type UserfpTimerCallback)
+{
+  fpTimerCallback = UserfpTimerCallback;
+}
+  
 
 
 /*--------------------------------------------------------------------------------------------------------------------*/
@@ -129,13 +138,18 @@ Promises:
 void TimerInitialize(void)
 {
   /* Load the block configuration register */
-
+   AT91C_BASE_TCB1->TCB_BMR=TCB_BMR_INIT;
   /* Channel 0 settings not configured at this time */
   
   /* Load Channel 1 settings */
-  
+   AT91C_BASE_TC1->TC_CMR=TC1_CMR_INIT ;
+   AT91C_BASE_TC1->TC_IER=TC1_IER_INIT ;
+   AT91C_BASE_TC1->TC_IDR=TC1_IDR_INIT ;
+   AT91C_BASE_TC1->TC_RC = TC1_RC_INIT ;
+   
   /* Set the default callback and activate the timer clock */
-
+  fpTimerCallback = TimerDefaultCallback;
+  AT91C_BASE_TC1->TC_CCR = TC1_CCR_INIT;
   /* Channel 2 settings not configured at this time */
 
   
@@ -143,7 +157,8 @@ void TimerInitialize(void)
   if( 1 )
   {
     /* Enable required interrupts */
-
+    NVIC_ClearPendingIRQ(IRQn_TC1);
+    NVIC_EnableIRQ(IRQn_TC1);
     Timer_StateMachine = TimerSM_Idle;
   }
   else
