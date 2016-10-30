@@ -59,7 +59,7 @@ void main(void)
 
   SspInitialize();
   TWIInitialize();
-
+  TimerInitialize();
   LcdInitialize();
   LedInitialize();
   ButtonInitialize();
@@ -89,7 +89,7 @@ void main(void)
     LcdRunActiveState();
     AntRunActiveState();
     SdCardRunActiveState();
-
+    TimerRunActiveState();
     /* Applications */
     UserAppRunActiveState();
     

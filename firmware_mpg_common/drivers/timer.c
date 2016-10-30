@@ -68,7 +68,7 @@ Promises:
 */
 void TimerSetTime(void)
 {
-  AT91C_BASE_TC1->TC_RC = u32TimerCountx;
+  
 }
   
 /*----------------------------------------------------------------------------------------------------------------------
@@ -84,7 +84,10 @@ Promises:
   - Specified channel on Timer 0 is set to run; if already running it remains running
   - Does NOT reset the timer value
 */
-
+void TimerStart(void)
+{
+  AT91C_BASE_TC1->TC_CCR = 0x01;
+}
 /*----------------------------------------------------------------------------------------------------------------------
 Function: TimerStop
 
@@ -112,9 +115,9 @@ Requires:
 Promises:
   - 
 */
-void TimerAssignCallback(fnCode_type UserfpTimerCallback)
+void TimerAssignCallback(fnCode_type fnAssignFunc)
 {
-  fpTimerCallback = UserfpTimerCallback;
+  fpTimerCallback = fnAssignFunc;
 }
   
 
@@ -232,6 +235,7 @@ void TC1_IrqHandler(void)
   /* Check for RC compare interrupt - reading TC_SR clears the bit if set */
   if(AT91C_BASE_TC1->TC_SR & AT91C_TC_CPCS)
   {
+    LedToggle(RED);
     Timer_u32TimerCounter++;
     fpTimerCallback();
   }

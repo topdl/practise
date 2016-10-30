@@ -27,7 +27,7 @@ PB6 Peripheral A is an open pin available for TIOB1 I/O function
 */
 #define TCB_BMR_INIT (u32)0x00100800
 /* Timer 1 interrupt period (1 tick = 2.67us); max 65535 */
-#define TC1_RC_INIT (u32)4
+#define TC1_RC_INIT (u32)0x5b8d8;
 
 #define TC1_CCR_INIT (u32)0x00000002
 /*
@@ -121,9 +121,10 @@ Function Declarations
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* Public functions                                                                                                   */
 /*--------------------------------------------------------------------------------------------------------------------*/
-void TimerStart(?);
-void TimerStop(?);
-
+void TimerStart(void);
+void TimerStop(void);
+void TimerAssignCallback(fnCode_type);
+void TimerSetTime(void);
 
 /*--------------------------------------------------------------------------------------------------------------------*/
 /* Protected functions                                                                                                */
@@ -141,10 +142,10 @@ inline void TimerDefaultCallback(void);
 /***********************************************************************************************************************
 State Machine Declarations
 ***********************************************************************************************************************/
-static void TimerAppSM_Idle(void);    
+static void TimerSM_Idle(void);    
 
-static void TimerAppSM_Error(void);         
-static void TimerAppSM_FailedInit(void);        
+static void TimerSM_Error(void);         
+static void TimerSM_FailedInit(void);        
 
 
 #endif /* __TIMER_H */
