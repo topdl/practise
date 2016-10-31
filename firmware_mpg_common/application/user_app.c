@@ -88,7 +88,9 @@ Promises:
 */
 void UserAppInitialize(void)
 {
-   TimerInitialize();
+  TimerStart(TIMER_CHANNEL1);
+  TimerAssignCallback(toglight);
+  
   /* If good initialization, set state to Idle */
   if( 1 )
   {
@@ -137,8 +139,6 @@ State Machine Function Definitions
 /* Wait for a message to be queued */
 static void UserAppSM_Idle(void)
 {
-    TimerStart(TIMER_CHANNEL1);
-    TimerAssignCallback(toglight);
 } /* end UserAppSM_Idle() */
      
 
