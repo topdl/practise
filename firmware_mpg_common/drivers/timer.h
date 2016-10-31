@@ -98,7 +98,7 @@ PB6 Peripheral A is an open pin available for TIOB1 I/O function
     00 [0] COVFS Counter Overflow interrupt not enabled
 */
 
-#define TC1_IDR_INIT (u32)0x000000EB
+#define TC1_IDR_INIT (u32)0x000000Ef
 /*
     31-08 [0] Reserved 
 

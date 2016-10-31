@@ -235,6 +235,7 @@ void TC1_IrqHandler(void)
   /* Check for RC compare interrupt - reading TC_SR clears the bit if set */
   if(AT91C_BASE_TC1->TC_SR & AT91C_TC_CPCS)
   {
+    
     Timer_u32TimerCounter++;
     fpTimerCallback();
   }
